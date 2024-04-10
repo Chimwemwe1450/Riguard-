@@ -1,0 +1,127 @@
+<ion-header>
+  <app-header-inspections></app-header-inspections>
+</ion-header>
+
+<div class="header-container fixed-header" slot="fixed">
+  <div class="page-heading">
+    <app-content-header [heading]="heading"
+                        [stepCount]=stepCount
+                        [currentStep]=step>
+    </app-content-header>
+  </div>
+</div>
+
+<ion-content>
+  <div class="page-container">
+    <div class="top-form-inputs">
+      <h5>Step {{step}} - {{stepDescription}}</h5>
+    </div>
+
+    <form [formGroup]="form">
+      <div class="form-inputs">
+        <ion-item class="input-field-item"
+                  [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['COMPONENT_TRACEABILITY'].invalid}">
+          <ion-label position="stacked">Component/Traceability Serial Number</ion-label>
+          <ion-input formControlName="COMPONENT_TRACEABILITY" placeholder="type here..."></ion-input>
+        </ion-item>
+        <br>
+
+        <div class="form-inputs-container">
+          <ion-label>Average Data</ion-label>
+          <div class="form-inputs-grid">
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <ion-item class="input-field-item">
+                    <ion-label position="stacked">Min</ion-label>
+                    <ion-input [disabled]="true" formControlName="AVERAGE_MIN" placeholder="type here..."></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item class="input-field-item">
+                    <ion-label position="stacked">Max</ion-label>
+                    <ion-input [disabled]="true" formControlName="AVERAGE_MAX" placeholder="type here..."></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item class="input-field-item">
+                    <ion-label position="stacked">Average</ion-label>
+                    <ion-input [disabled]="true" formControlName="AVERAGE_AVERAGE" placeholder="type here..."></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </div>
+        <br>
+
+        <div class="form-inputs-container">
+          <ion-label>Consumables</ion-label>
+          <div class="form-inputs-grid">
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <ion-item class="input-field-item"
+                            [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['CONSUM_TYPE'].invalid}">
+                    <ion-label position="stacked">Type</ion-label>
+                    <ion-input formControlName="CONSUM_TYPE" placeholder="type here..."></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item class="input-field-item"
+                            [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['CONSUM_BRAND'].invalid}">
+                    <ion-label position="stacked">Brand</ion-label>
+                    <ion-input formControlName="CONSUM_BRAND" placeholder="type here..."></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item class="input-field-item"
+                            [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['CONSUM_BATCH'].invalid}">
+                    <ion-label position="stacked">Batch</ion-label>
+                    <ion-input formControlName="CONSUM_BATCH" placeholder="type here..."></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </div>
+        <br>
+        <div [ngClass]="{'invalid-input':navigateNext && form.controls['INSPECTION_STATUS'].invalid}">
+          <ion-radio-group formControlName="INSPECTION_STATUS" value="accept">
+            <ion-item>
+              <ion-label>Accept</ion-label>
+              <ion-radio slot="start" value="accept"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Reject</ion-label>
+              <ion-radio slot="start" value="reject"></ion-radio>
+            </ion-item>
+            <ion-item lines="None">
+              <ion-label>Engineer Review</ion-label>
+              <ion-radio slot="start" value="review"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </div>
+        <br>
+        <ion-item class="input-field-item"
+                  [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['NOTES'].invalid}">
+          <ion-label position="stacked">Notes</ion-label>
+          <ion-textarea formControlName="NOTES" placeholder="type here..."
+                        rows="3">
+          </ion-textarea>
+        </ion-item>
+      </div>
+    </form>
+
+  </div>
+</ion-content>
+
+<ion-footer>
+  <app-footer-ut-wall [currentRoute]=step
+                      [isFirstRoute]="false"
+                      [isFinalRoute]="true"
+                      [isFormValid]="validForm"
+                      validationMessage="Please complete all required fields."
+                      (nextClicked)="navigateToNext($event)">>
+  </app-footer-ut-wall>
+</ion-footer>

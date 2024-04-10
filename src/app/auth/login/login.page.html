@@ -1,0 +1,36 @@
+<ion-content>
+  <div class="page-centered">
+    <div class="login-content">
+      <div class="login-logo">
+        <ion-img src="/assets/logos/logo.png"></ion-img>
+      </div>
+
+      <div class="center-text login-title">
+        Sign In
+      </div>
+      <br>
+
+      <form [formGroup]="loginForm">
+        <ion-item>
+          <ion-icon name="person-circle"></ion-icon>&nbsp;&nbsp;
+          <ion-input formControlName="email" placeholder="Username"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-icon name="lock-open"></ion-icon>&nbsp;&nbsp;
+          <ion-input formControlName="password" type="password" placeholder="Password"></ion-input>
+        </ion-item>
+      </form>
+      <br>
+      <ion-button color="secondary" (click)="onSubmit()" expand="block">Sign in</ion-button>
+      <br>
+      <div class="center-text tertiary-color"
+           (click)="passwordResetModal()">
+        Forgot Password?
+      </div>
+      <!-- <ion-button color="tertiary" (click)="passwordResetModal()" fill="clear" expand="block">Forgot Password</ion-button> -->
+    </div>
+
+  </div>
+
+</ion-content>

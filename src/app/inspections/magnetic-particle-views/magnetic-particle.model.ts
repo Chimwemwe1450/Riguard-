@@ -1,0 +1,35 @@
+export class MagneticParticle {
+  BATCH_01: string;
+  BATCH_02: string;
+  BATCH_03: string;
+  BATCH_04: string;
+  BRAND_01: string;
+  BRAND_02: string;
+  BRAND_03: string;
+  BRAND_04: string;
+  COMPONENT_TRACEABILITY: string;
+  FIELD_INDICATOR: string;
+  LIFT_TEST_SERIAL: string;
+  INSPECTION_STATUS: string;
+  LIGHT_LUX: string;
+  LIGHT_LUX_SERIAL_NUMBER: string;
+  MAGNETISATION: string;
+  MATERIAL: string;
+  MATERIAL_CONDITION: string;
+  METHOD_1: string;
+  METHOD_2: string;
+  METHOD_3: string;
+  METHOD_4: string;
+  SURFACE_CONDITION: string;
+  SURFACE_TEMPERATURE: string;
+  TEST_EQUIPMENT: string;
+  TEST_EQUIPMENT_SERIAL_NUMBER: string;
+  TYPE_01: string;
+  TYPE_02: string;
+  TYPE_03: string;
+  TYPE_04: string;
+  VERIFICATION_LIFT_TEST: string;
+  UV: string;
+  UV_SERIAL_NUMBER: string;
+  complete: boolean;
+}

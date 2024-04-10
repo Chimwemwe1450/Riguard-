@@ -1,0 +1,67 @@
+<ion-header>
+  <app-header-inspections></app-header-inspections>
+</ion-header>
+
+<div class="header-container fixed-header" slot="fixed">
+  <div class="page-heading">
+    <app-content-header [heading]="heading"
+                        [stepCount]=stepCount
+                        [currentStep]=step>
+    </app-content-header>
+  </div>
+</div>
+
+<ion-content>
+  <div class="page-container">
+    <div class="top-form-inputs">
+      <h5>Step {{step}} - {{stepDescription}}</h5>
+    </div>
+
+    <div class="form-inputs">
+      <!-- sets of 8. numbering is 'x00', 'x090'. generated in service. -->
+      <!-- <ion-item *ngFor="let input of readingsInputs" class="input-field-item">
+        <ion-label position="stacked">{{input}}</ion-label>
+        <ion-input placeholder="type here..."></ion-input>
+      </ion-item> -->
+
+      <form [formGroup]="form" >
+        <div formArrayName="readingA" *ngFor="let reading of rows.controls; let i = index;" class="form-inputs-container margin-bottom">
+          <ion-label>{{reading.value.feet}} foot</ion-label>
+          <div [formGroupName]="i" class="form-inputs">
+            <ion-item class="input-field-item">
+              <ion-input type="text" formControlName="deg0" placeholder="0"></ion-input>
+              <ion-input type="text" formControlName="deg90" placeholder="90"></ion-input>
+            </ion-item>
+            <ion-item class="input-field-item">
+              <ion-input type="text" formControlName="deg180" placeholder="180"></ion-input>
+              <ion-input type="text" formControlName="deg270" placeholder="270"></ion-input>
+            </ion-item>
+            <ion-item class="input-field-item">
+              <ion-input type="text" formControlName="deg45" placeholder="45"></ion-input>
+              <ion-input type="text" formControlName="deg135" placeholder="135"></ion-input>
+            </ion-item>
+            <ion-item class="input-field-item">
+              <ion-input type="text" formControlName="deg225" placeholder="225"></ion-input>
+              <ion-input type="text" formControlName="deg315" placeholder="315"></ion-input>
+            </ion-item>
+          </div>
+        </div>
+
+      </form>
+
+      <ion-button (click)="addRow()">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-button>
+
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <app-footer-ut-wall [currentRoute]=step
+                      [isFirstRoute]="false"
+                      [isFinalRoute]="false"
+                      [isFormValid]="validForm"
+                      validationMessage="Add at least 1 value to continue.">
+  </app-footer-ut-wall>
+</ion-footer>

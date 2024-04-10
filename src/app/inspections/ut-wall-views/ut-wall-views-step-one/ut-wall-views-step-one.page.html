@@ -1,0 +1,180 @@
+<ion-header>
+  <app-header-inspections></app-header-inspections>
+</ion-header>
+
+<div class="header-container fixed-header" slot="fixed">
+  <div class="page-heading">
+    <app-content-header [heading]="heading"
+                        [stepCount]=stepCount
+                        [currentStep]=step>
+    </app-content-header>
+  </div>
+</div>
+
+<ion-content>
+  <div class="page-container">
+    <div class="top-form-inputs">
+      <h5>Step {{step}} - {{stepDescription}}</h5>
+      <ion-list>
+        <ion-item class="item-item" lines="None">
+          <ion-avatar>
+            <ion-icon name="reader-outline"></ion-icon>
+          </ion-avatar>
+          <ion-label>
+            <b>Reference Procedure</b><br>
+            {{critProcedure.rp}}
+          </ion-label>
+        </ion-item>
+        <ion-item class="item-item" lines="None">
+          <ion-avatar>
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+          </ion-avatar>
+          <ion-label>
+            <b>Acceptance Criteria</b><br>
+            {{critProcedure.ac}}
+          </ion-label>
+        </ion-item>
+      </ion-list>
+      <br>
+      <ion-button (click)="usePreviousData()" color="secondary">
+        <ion-icon slot="start" name="reload-outline" class="smaller-icon"></ion-icon>
+        Use previous data
+      </ion-button>
+    </div>
+    <br>
+    <form [formGroup]="form">
+      <div class="form-inputs-container">
+        <div class="form-inputs">
+          <ion-item class="input-field-item"
+                    [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['MATERIAL'].invalid}">
+            <ion-label for="MATERIAL" position="stacked">Material</ion-label>
+            <ion-select formControlName="MATERIAL" placeholder="Select Material">
+              <ion-select-option value="4130">4130</ion-select-option>
+              <ion-select-option value="4140">4140</ion-select-option>
+              <ion-select-option value="f22">F22</ion-select-option>
+              <ion-select-option value="x80">X80</ion-select-option>
+              <ion-select-option value="x65">X65</ion-select-option>
+              <ion-select-option value="duplex">Duplex</ion-select-option>
+              <ion-select-option value="StainlessSteel">Stainless Steel</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item class="input-field-item"
+                    [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['SURFACE_CONDITION'].invalid}">
+            <ion-label position="stacked">Surface Condition</ion-label>
+            <ion-select formControlName="SURFACE_CONDITION" placeholder="Select Surface Condition">
+              <ion-select-option value="blasted">Blasted</ion-select-option>
+              <ion-select-option value="machined">Machined</ion-select-option>
+              <ion-select-option value="welded">As welded</ion-select-option>
+              <ion-select-option value="coated">Coated</ion-select-option>
+              <ion-select-option value="uhpWashed">UHP washed</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item class="input-field-item"
+                    [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['MATERIAL_CONDITION'].invalid}"c>
+            <ion-label position="stacked">Material Condition</ion-label>
+            <ion-select formControlName="MATERIAL_CONDITION" placeholder="Select Material Condition">
+              <ion-select-option value="rawMaterial">Raw material</ion-select-option>
+              <ion-select-option value="preWeldMachined">Pre-weld machined</ion-select-option>
+              <ion-select-option value="welded">Welded</ion-select-option>
+              <ion-select-option value="afterPwht">After PWHT</ion-select-option>
+              <ion-select-option value="finishMachined">Finish machined</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item class="input-field-item"
+                    [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['SURFACE_TEMPERATURE'].invalid}">
+            <ion-label position="stacked">Surface Temperature (C)</ion-label>
+            <ion-input type="number" formControlName="SURFACE_TEMPERATURE" placeholder="Surface Temperature (C)">
+            </ion-input>
+          </ion-item>
+        </div>
+      </div>
+      <br>
+      <div class="form-inputs-container">
+        <div class="form-inputs">
+          <ion-item class="input-field-item"
+                    [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['PROBE_SERIAL_NUMBER'].invalid}">
+            <ion-label position="stacked">Probe Serial Number</ion-label>
+            <ion-input formControlName="PROBE_SERIAL_NUMBER" placeholder="type here...">
+            </ion-input>
+          </ion-item>
+
+          <ion-item class="input-field-item"
+                    [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['PROBE_FREQUENCY'].invalid}">
+            <ion-label position="stacked">Probe Frequency</ion-label>
+            <ion-input formControlName="PROBE_FREQUENCY" placeholder="type here...">
+            </ion-input>
+          </ion-item>
+
+          <ion-item class="input-field-item"
+                    [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['PROBE_SIZE'].invalid}">
+            <ion-label position="stacked">Probe Size</ion-label>
+            <ion-input formControlName="PROBE_SIZE" placeholder="type here...">
+            </ion-input>
+          </ion-item>
+        </div>
+      </div>
+      <div class="form-inputs">
+        <ion-item class="input-field-item"
+                  [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['TEST_EQUIPMENT'].invalid}">
+          <ion-label position="stacked">Test Equipment</ion-label>
+          <ion-input formControlName="TEST_EQUIPMENT" placeholder="type here..."></ion-input>
+        </ion-item>
+        <ion-item class="input-field-item"
+                  [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['TEST_EQUIP_SERIAL_NUMBER'].invalid}">
+          <ion-label position="stacked">Serial Number</ion-label>
+          <ion-input formControlName="TEST_EQUIP_SERIAL_NUMBER" placeholder="type here..."></ion-input>
+        </ion-item>
+        <ion-item class="input-field-item">
+          <ion-label position="stacked">Calibrated</ion-label>
+          <ion-datetime formControlName="CALIBERATED"
+                        displayFormat="DDDD, DD MMMM YYYY">
+          </ion-datetime>
+        </ion-item>
+        <br>
+        <div [ngClass]="{'invalid-input':navigateNext && form.controls['MEASUREMENT_POINT'].invalid}">
+          <ion-radio-group formControlName="MEASUREMENT_POINT"
+                           value="4">
+            <ion-label class="radio-label">Measurement Points</ion-label>
+            <ion-item>
+              <ion-label>4 Points</ion-label>
+              <ion-radio slot="start" [value]=4></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </div>
+        <br>
+        <div [ngClass]="{'invalid-input':navigateNext && form.controls['DISTANCE_BETWEEN_READINGS'].invalid}">
+          <ion-radio-group formControlName="DISTANCE_BETWEEN_READINGS"
+                           value="">
+            <ion-label class="radio-label">Distance Between Readings</ion-label>
+            <ion-item>
+              <ion-label>1 foot</ion-label>
+              <ion-radio slot="start" [value]=1></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>3 feet</ion-label>
+              <ion-radio slot="start" [value]=3></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>5 feet</ion-label>
+              <ion-radio slot="start" [value]=5></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</ion-content>
+
+<ion-footer>
+  <app-footer-ut-wall [currentRoute]=step
+                      [isFirstRoute]="true"
+                      [isFinalRoute]="false"
+                      [isFormValid]="validForm"
+                      validationMessage="Please complete all required fields."
+                      (nextClicked)="navigateToNext($event)">
+  </app-footer-ut-wall>
+</ion-footer>

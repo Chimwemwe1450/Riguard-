@@ -1,0 +1,138 @@
+<ion-header>
+  <app-header-inspections></app-header-inspections>
+</ion-header>
+
+<div class="header-container fixed-header" slot="fixed">
+  <div class="page-heading">
+    <app-content-header [heading]="heading"
+                        [stepCount]="1"
+                        [currentStep]="1">
+    </app-content-header>
+  </div>
+</div>
+
+<ion-content>
+  <div class="page-container">
+    <div class="form-inputs-container">
+      <div class="form-inputs">
+        <!-- <span *ngIf="croppedImage" class="clear-button">
+          <ion-icon (click)="clearBlock()"
+                    name="remove-circle-outline">
+          </ion-icon>
+        </span> -->
+
+        <div class="center-text">
+          <div class="photo-frame">
+            <ion-img *ngIf="croppedImage; else placeholder" [src]="croppedImage"></ion-img>
+            <ng-template #placeholder>
+              <ion-icon name="image-outline"></ion-icon>
+            </ng-template>
+          </div>
+          <br>
+          <ion-button color="secondary"
+                      (click)="takePhoto()">Take photo
+            <ion-icon slot="start" name="camera-outline" class="smaller-icon"></ion-icon>
+          </ion-button>
+        </div>
+        <br>
+        <ion-item class="input-field-item">
+          <ion-label position="stacked">Notes</ion-label>
+          <ion-textarea [(ngModel)]="notesField"
+                        placeholder="type here..."
+                        rows="3">
+          </ion-textarea>
+        </ion-item>
+        <div class="center-text">
+          <ion-button fill="clear"
+                      color="danger"
+                      class="clear-button"
+                      (click)="clearBlock()">Clear
+          </ion-button>
+          <ion-button color="primary"
+                      (click)="savePhoto()">Attach
+            <ion-icon slot="start" name="checkmark-outline" class="smaller-icon"></ion-icon>
+          </ion-button>
+        </div>
+
+      </div>
+    </div>
+
+    <ng-container *ngIf="this.dataList.length > 0">
+      <div class="form-inputs">
+        <ion-grid class="no-padding photos-list">
+          <ion-row class="row-heading fixed-heading">
+            <ion-col>File</ion-col>
+            <ion-col>Note</ion-col>
+            <ion-col size="1"></ion-col>
+            <ion-col size="1"></ion-col>
+          </ion-row>
+
+          <div class="grid-data-rows">
+            <ion-row *ngFor="let photo of dataList; let i = index"
+                      class="row-data">
+              <ion-col (click)="editPhoto(i)">
+                <ion-img [src]="photo.image"
+                          class="table-image">
+                </ion-img>
+              </ion-col>
+              <ion-col class="table-notes">
+                {{photo.note}}
+              </ion-col>
+              <ion-col size="2" class="center-text">
+                <ion-icon (click)="deletePhoto(i)"
+                          name="trash-outline"
+                          class="small-icon">
+                </ion-icon>
+              </ion-col>
+            </ion-row>
+          </div>
+
+        </ion-grid>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="navigateNext && this.dataList.length === 0">
+      <div id="no-images" class="center-text">
+        <ion-label color="danger">No images found.</ion-label>
+      </div>
+    </ng-container>
+
+    <div class="form-inputs">
+      <form [formGroup]="form">
+        <ion-item class="select-field-item"
+                  [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['VIS_FORM_1_COMPONENT_TRACEBILITY'].invalid}">
+          <ion-label position="stacked">Component/Traceability Serial Number</ion-label>
+          <ion-input formControlName="VIS_FORM_1_COMPONENT_TRACEBILITY" placeholder="type here..."></ion-input>
+        </ion-item>
+        <br>
+        <div [ngClass]="{'invalid-input':navigateNext && form.controls['VIS_FORM_1_STATUS'].invalid}">
+          <ion-radio-group formControlName="VIS_FORM_1_STATUS" value="accept">
+            <ion-item>
+                <ion-label>Accept</ion-label>
+                <ion-radio slot="start" value="Acceptable"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label>Reject</ion-label>
+                <ion-radio slot="start" value="Reject"></ion-radio>
+            </ion-item>
+            <ion-item lines="None">
+                <ion-label>Engineer Review</ion-label>
+                <ion-radio slot="start" value="Engineer_Review"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <app-footer-visual-generic [currentRoute]="1"
+                             [isFirstRoute]="true"
+                             [isFinalRoute]="true"
+                             [isFormValid]="validForm"
+                             validationMessage="Please complete all required fields."
+                             [imageNotAttached]="croppedImage !== undefined"
+                             (nextClicked)="navigateToNext($event)">
+  </app-footer-visual-generic>
+</ion-footer>

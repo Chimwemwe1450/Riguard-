@@ -1,0 +1,98 @@
+<ion-header>
+  <app-header-inspections></app-header-inspections>
+</ion-header>
+
+<div class="header-container fixed-header" slot="fixed">
+  <div class="page-heading">
+    <app-content-header [heading]="heading"
+                        [stepCount]="stepCount"
+                        [currentStep]="step">
+    </app-content-header>
+  </div>
+</div>
+
+<ion-content>
+  <div class="page-container">
+    <div class="top-form-inputs">
+      <h5>Step {{step}} - {{stepDescription}}</h5>
+    </div>
+    <br>
+    <form [formGroup]="form">
+      <div class="form-inputs-container">
+        <ion-label>Choke Pin Connector</ion-label>
+        <div class="form-inputs">
+          <ion-item class="select-field-item"
+                    [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['CHOKE_PIN_CONNECTOR_FORM_2_SCORING'].invalid}">
+            <ion-label position="stacked">Scoring</ion-label>
+            <ion-select formControlName="CHOKE_PIN_CONNECTOR_FORM_2_SCORING" placeholder="Select Scoring">
+              <ion-select-option value="Light">Light</ion-select-option>
+              <ion-select-option value="Moderate">Moderate</ion-select-option>
+              <ion-select-option value="Severe">Severe</ion-select-option>
+              <ion-select-option value="None">No Scoring</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item class="select-field-item"
+                    [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['CHOKE_PIN_CONNECTOR_FORM_2_MECH_DAMAGE'].invalid}">
+            <ion-label position="stacked">Mechanical Damage</ion-label>
+            <ion-select formControlName="CHOKE_PIN_CONNECTOR_FORM_2_MECH_DAMAGE" placeholder="Select Mechanical Damage">
+              <ion-select-option value="Light">Light</ion-select-option>
+              <ion-select-option value="Moderate">Moderate</ion-select-option>
+              <ion-select-option value="Severe">Severe</ion-select-option>
+              <ion-select-option value="None">No Mech Damage</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item class="select-field-item"
+                    [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['CHOKE_PIN_CONNECTOR_FORM_2_STATUS'].invalid}">
+            <ion-label position="stacked">Status</ion-label>
+            <ion-select formControlName="CHOKE_PIN_CONNECTOR_FORM_2_STATUS" placeholder="Select Status">
+              <ion-select-option value="accept">Accept</ion-select-option>
+              <ion-select-option value="reject">Reject</ion-select-option>
+              <ion-select-option value="review">Engineer Review</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item class="select-field-item"
+                    [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['CHOKE_PIN_CONNECTOR_FORM_2_PITTING'].invalid}">
+            <ion-label position="stacked">Pitting</ion-label>
+            <ion-select formControlName="CHOKE_PIN_CONNECTOR_FORM_2_PITTING" placeholder="Select Pitting">
+              <ion-select-option value="Light">Light</ion-select-option>
+              <ion-select-option value="Moderate">Moderate</ion-select-option>
+              <ion-select-option value="Severe">Severe</ion-select-option>
+              <ion-select-option value="None">No Pitting</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item class="select-field-item"
+                    [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['CHOKE_PIN_CONNECTOR_FORM_2_COMMENT'].invalid}">
+            <ion-label position="stacked">Comment</ion-label>
+            <ion-select formControlName="CHOKE_PIN_CONNECTOR_FORM_2_COMMENT" placeholder="Select Comment">
+              <ion-select-option value="Component missing">Component missing</ion-select-option>
+              <ion-select-option value="Dimensional inspection required">Dimensional inspection required</ion-select-option>
+              <ion-select-option value="Dress and polish completed">Dress and polish completed</ion-select-option>
+              <ion-select-option value="Dress and polish required">Dress and polish required</ion-select-option>
+              <ion-select-option value="engineering review">Engineering review</ion-select-option>
+              <ion-select-option value="Fit for service">Fit for service</ion-select-option>
+              <ion-select-option value="Limited access">Limited access</ion-select-option>
+              <ion-select-option value="NDE inspection required">NDE inspection required</ion-select-option>
+              <ion-select-option value="Unfit for service">Unfit for service</ion-select-option>
+              <ion-select-option value="None">n/a</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</ion-content>
+
+<ion-footer>
+  <app-bwm-footer [currentRoute]="step"
+                  [isFirstRoute]="false"
+                  [isFinalRoute]="false"
+                  [isFormValid]="validForm"
+                  validationMessage="Please complete all required fields."
+                  (nextClicked)="navigateToNext($event)">
+  </app-bwm-footer>
+</ion-footer>

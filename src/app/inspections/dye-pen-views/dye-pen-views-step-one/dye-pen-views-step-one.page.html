@@ -1,0 +1,109 @@
+<ion-header>
+  <app-header-inspections></app-header-inspections>
+</ion-header>
+
+<div class="header-container fixed-header" slot="fixed">
+  <div class="page-heading">
+    <app-content-header [heading]="heading"
+                        [stepCount]="stepCount"
+                        [currentStep]="step">
+    </app-content-header>
+  </div>
+</div>
+
+<ion-content>
+  <div class="page-container">
+    <div class="top-form-inputs">
+      <h5>Step {{step}} - {{stepDescription}}</h5>
+      <ion-list>
+        <ion-item class="item-item" lines="None">
+          <ion-avatar>
+            <ion-icon name="reader-outline"></ion-icon>
+          </ion-avatar>
+          <ion-label>
+            <b>Reference Procedure</b><br>
+            {{critProcedure.rp}}
+          </ion-label>
+        </ion-item>
+        <ion-item class="item-item" lines="None">
+          <ion-avatar>
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+          </ion-avatar>
+          <ion-label>
+            <b>Acceptance Criteria</b><br>
+            {{critProcedure.ac}}
+          </ion-label>
+        </ion-item>
+      </ion-list>
+      <br>
+      <ion-button (click)="usePreviousData()"
+                  color="secondary">
+          <ion-icon slot="start"
+                    name="reload-outline"
+                    class="smaller-icon">
+          </ion-icon>
+          Use previous data
+      </ion-button>
+    </div>
+    <br>
+    <form [formGroup]="form">
+      <div class="form-inputs-container">
+        <div class="form-inputs">
+          <ion-item class="select-field-item"
+                    [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['MATERIAL'].invalid}">
+            <ion-label position="stacked">Material</ion-label>
+            <ion-select formControlName="MATERIAL" placeholder="Select Material">
+              <ion-select-option value="Stainless steel">Stainless steel</ion-select-option>
+              <ion-select-option value="Inconel">Inconel</ion-select-option>
+              <ion-select-option value="Collmonoy">Collmonoy</ion-select-option>
+              <ion-select-option value="Duplex">Duplex</ion-select-option>
+              <ion-select-option value="Stellite">Stellite</ion-select-option>
+              <ion-select-option value="Tungsten carbide">Tungsten carbide</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item class="select-field-item"
+                    [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['SURFACE_CONDITION'].invalid}">
+            <ion-label position="stacked">Surface Condition</ion-label>
+            <ion-select formControlName="SURFACE_CONDITION" placeholder="Select Surface Condition">
+              <ion-select-option value="Blasted">Blasted</ion-select-option>
+              <ion-select-option value="Machined">Machined</ion-select-option>
+              <ion-select-option value="As welded">As welded</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item class="select-field-item"
+                    [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['MATERIAL_CONDITION'].invalid}">
+            <ion-label position="stacked">Material Condition</ion-label>
+            <ion-select formControlName="MATERIAL_CONDITION" placeholder="Select Material Condition">
+              <ion-select-option value="Raw material">Raw material</ion-select-option>
+              <ion-select-option value="Pre-weld machined">Pre-weld machined</ion-select-option>
+              <ion-select-option value="Welded">Welded</ion-select-option>
+              <ion-select-option value="After PWHT">After PWHT</ion-select-option>
+              <ion-select-option value="Finish machined">Finish machined</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item class="select-field-item"
+                    [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['SURFACE_TEMPERATURE'].invalid}">
+            <ion-label position="stacked">Surface Temperature (C)</ion-label>
+            <ion-input type="number" formControlName="SURFACE_TEMPERATURE" placeholder="Surface Temperature (C)">
+            </ion-input>
+          </ion-item>
+
+        </div>
+      </div>
+    </form>
+
+  </div>
+</ion-content>
+
+<ion-footer>
+  <app-footer-dye-pen [currentRoute]="step"
+                      [isFirstRoute]="true"
+                      [isFinalRoute]="false"
+                      [isFormValid]="validForm"
+                      validationMessage="Please complete all required fields."
+                      (nextClicked)="navigateToNext($event)">
+  </app-footer-dye-pen>
+</ion-footer>

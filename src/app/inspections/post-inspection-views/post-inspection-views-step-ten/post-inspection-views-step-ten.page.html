@@ -1,0 +1,75 @@
+<ion-header>
+    <app-header-inspections></app-header-inspections>
+</ion-header>
+
+<div class="header-container fixed-header" slot="fixed">
+    <div class="page-heading">
+        <app-content-header [heading]="heading" [stepCount]=stepCount [currentStep]=step>
+        </app-content-header>
+    </div>
+</div>
+
+<ion-content>
+    <div class="page-container">
+        <div class="top-form-inputs">
+            <h5>Step {{step}} - {{stepDescription}}</h5>
+        </div>
+
+        <form [formGroup]="form">
+            <div class="form-inputs">
+              <div [ngClass]="{'invalid-input':navigateNext && form.controls['INSTALL_PRO_STATE'].invalid}">
+                <ion-radio-group formControlName="INSTALL_PRO_STATE" value="COMPLETE">
+                  <ion-item>
+                      <ion-label>Complete</ion-label>
+                      <ion-radio slot="start" value="COMPLETE"></ion-radio>
+                  </ion-item>
+                  <ion-item>
+                      <ion-label>Restricted</ion-label>
+                      <ion-radio slot="start" value="RESTRICTED"></ion-radio>
+                  </ion-item>
+                  <ion-item lines="None">
+                      <ion-label>n/a</ion-label>
+                      <ion-radio slot="start" value="N/A"></ion-radio>
+                  </ion-item>
+                </ion-radio-group>
+              </div>
+              <br>
+              <br>
+              <ion-item class="input-field-item"
+                        [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['INSTALL_PRO_COMMENT'].invalid}">
+                  <ion-label position="stacked">Comments</ion-label>
+                  <ion-textarea formControlName="INSTALL_PRO_COMMENT" placeholder="type here..." rows="3">
+                  </ion-textarea>
+              </ion-item>
+              <br>
+              <div [ngClass]="{'invalid-input':navigateNext && form.controls['STATUS'].invalid}">
+                <ion-radio-group formControlName="STATUS" value="accept">
+                  <ion-item>
+                      <ion-label>Accept</ion-label>
+                      <ion-radio slot="start" value="Acceptable"></ion-radio>
+                  </ion-item>
+                  <ion-item>
+                      <ion-label>Reject</ion-label>
+                      <ion-radio slot="start" value="Reject"></ion-radio>
+                  </ion-item>
+                  <ion-item lines="None">
+                      <ion-label>Engineer Review</ion-label>
+                      <ion-radio slot="start" value="Engineer_Review"></ion-radio>
+                  </ion-item>
+                </ion-radio-group>
+              </div>
+            </div>
+        </form>
+
+    </div>
+</ion-content>
+
+<ion-footer>
+    <app-footer-post-inspection [currentRoute]=step
+                                [isFirstRoute]="false"
+                                [isFinalRoute]="true"
+                                [isFormValid]="validForm"
+                                validationMessage="Please complete all required fields."
+                                (nextClicked)="navigateToNext($event)">
+    </app-footer-post-inspection>
+</ion-footer>

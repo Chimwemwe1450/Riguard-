@@ -1,0 +1,102 @@
+<ion-header>
+  <app-header-inspections></app-header-inspections>
+</ion-header>
+
+<div class="header-container fixed-header" slot="fixed">
+  <div class="page-heading">
+    <app-content-header [heading]="heading"
+                        [stepCount]="stepCount"
+                        [currentStep]="step">
+    </app-content-header>
+  </div>
+</div>
+
+<ion-content>
+  <div class="page-container">
+    <div class="top-form-inputs">
+      <h5>Step {{step}} - {{stepDescription}}</h5>
+      <figure>
+        <ion-img class="views-image-85" src="/assets/images/bwm_pin_connector_anode.png"></ion-img>
+      </figure>
+    </div>
+    <br>
+    <form [formGroup]="form">
+      <div class="form-inputs-container">
+        <ion-label>Hydraulic Pin 1 Anode</ion-label>
+        <div class="form-inputs">
+          <ion-item class="select-field-item"
+                    [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['HYD_ANODE_FORM_2_DIM_A_ANODE'].invalid}">
+            <ion-label position="stacked">Dim A: Anode (in)</ion-label>
+            <ion-input formControlName="HYD_ANODE_FORM_2_DIM_A_ANODE" placeholder="type here...">
+            </ion-input>
+          </ion-item>
+
+          <ion-item class="select-field-item"
+                    [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['HYD_ANODE_FORM_2_DIM_B_ANODE'].invalid}">
+            <ion-label position="stacked">Dim B: Anode (in)</ion-label>
+            <ion-input formControlName="HYD_ANODE_FORM_2_DIM_B_ANODE" placeholder="type here...">
+            </ion-input>
+          </ion-item>
+
+          <ion-item class="select-field-item"
+                    [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['HYD_ANODE_FORM_2_DIM_C_ANODE'].invalid}">
+            <ion-label position="stacked">Dim C: Anode (in)</ion-label>
+            <ion-input formControlName="HYD_ANODE_FORM_2_DIM_C_ANODE" placeholder="type here...">
+            </ion-input>
+          </ion-item>
+
+          <ion-item class="select-field-item"
+                    [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['HYD_ANODE_FORM_2_CONTINUITY_TEST'].invalid}">
+            <ion-label position="stacked">Continuity Test</ion-label>
+            <ion-input formControlName="HYD_ANODE_FORM_2_CONTINUITY_TEST" placeholder="type here...">
+            </ion-input>
+          </ion-item>
+        </div>
+      </div>
+      <br>
+      <div class="form-inputs-container">
+        <ion-label>Hydraulic Pin 2 Anode</ion-label>
+        <div class="form-inputs">
+          <ion-item class="select-field-item"
+                    [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['HYD_ANODE_B_FORM_2_DIM_A_ANODE'].invalid}">
+            <ion-label position="stacked">Dim A: Anode (in)</ion-label>
+            <ion-input formControlName="HYD_ANODE_B_FORM_2_DIM_A_ANODE" placeholder="type here...">
+            </ion-input>
+          </ion-item>
+
+          <ion-item class="select-field-item"
+                    [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['HYD_ANODE_B_FORM_2_DIM_B_ANODE'].invalid}">
+            <ion-label position="stacked">Dim B: Anode (in)</ion-label>
+            <ion-input formControlName="HYD_ANODE_B_FORM_2_DIM_B_ANODE" placeholder="type here...">
+            </ion-input>
+          </ion-item>
+
+          <ion-item class="select-field-item"
+                    [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['HYD_ANODE_B_FORM_2_DIM_C_ANODE'].invalid}">
+            <ion-label position="stacked">Dim C: Anode (in)</ion-label>
+            <ion-input formControlName="HYD_ANODE_B_FORM_2_DIM_C_ANODE" placeholder="type here...">
+            </ion-input>
+          </ion-item>
+
+          <ion-item class="select-field-item"
+                    [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['HYD_ANODE_B_FORM_2_CONTINUITY_TEST'].invalid}">
+            <ion-label position="stacked">Continuity Test</ion-label>
+            <ion-input formControlName="HYD_ANODE_B_FORM_2_CONTINUITY_TEST" placeholder="type here...">
+            </ion-input>
+          </ion-item>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</ion-content>
+
+<ion-footer>
+  <app-bwm-footer [currentRoute]="step"
+                  [isFirstRoute]="false"
+                  [isFinalRoute]="false"
+                  [isFormValid]="validForm"
+                  validationMessage="Please complete all required fields."
+                  (nextClicked)="navigateToNext($event)">
+  </app-bwm-footer>
+</ion-footer>

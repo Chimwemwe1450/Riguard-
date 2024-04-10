@@ -1,0 +1,13 @@
+<div *ngIf="isNativePlatform; else webUpload">
+  <ion-button (click)="fromGallery()" color="secondary">
+    <ion-icon slot="start" name="camera-outline" class="smaller-icon"></ion-icon>
+    Take photo {{labelPostFix}}
+  </ion-button>
+</div>
+
+<ng-template #webUpload>
+  <ion-input (click)="fromGallery()" color="secondary">
+    <ion-icon slot="start" name="camera-outline" class="smaller-icon"></ion-icon>
+    Take photo {{labelPostFix}}
+  </ion-input>
+</ng-template>

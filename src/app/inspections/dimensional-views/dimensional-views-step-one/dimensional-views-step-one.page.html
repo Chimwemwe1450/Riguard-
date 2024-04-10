@@ -1,0 +1,203 @@
+<ion-header>
+  <app-header-inspections></app-header-inspections>
+</ion-header>
+
+<div class="header-container fixed-header" slot="fixed">
+  <div class="page-heading">
+    <app-content-header [heading]="heading"
+                        [stepCount]="1"
+                        [currentStep]="1">
+    </app-content-header>
+  </div>
+</div>
+
+<ion-content>
+  <div class="page-container">
+    <div class="top-form-inputs">
+      <ion-button (click)="usePreviousData()"
+                  color="secondary">
+        <ion-icon slot="start" name="reload-outline" class="smaller-icon"></ion-icon>
+        Use previous data
+      </ion-button>
+    </div>
+    <br>
+    <form [formGroup]="form">
+      <div class="form-inputs">
+        <ion-item class="select-field-item"
+                  [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['DATUM'].invalid}">
+          <ion-label position="stacked">Datum</ion-label>
+          <ion-select formControlName="DATUM" placeholder="Select Datum">
+            <ion-select-option value="CHOKE">CHOKE</ion-select-option>
+            <ion-select-option value="KILL">KILL</ion-select-option>
+            <ion-select-option value="BOOSTER">BOOSTER</ion-select-option>
+            <ion-select-option value="HYD1">HYD1</ion-select-option>
+            <ion-select-option value="HYD2">HYD2</ion-select-option>
+            <ion-select-option value="AS MARKED ON COMPONENT">AS MARKED ON COMPONENT</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <br>
+        <ion-img class="views-image-100" [src]="dimensionalType.image"></ion-img>
+        <br>
+        <div class="various-form-inputs-container">
+          <div [ngClass]="{'invalid-input':navigateNext && form.controls['MEASUREMENT_POINT'].invalid}">
+            <ion-radio-group formControlName="MEASUREMENT_POINT">
+              <ion-label class="radio-label">Measurement Points</ion-label>
+              <ion-item>
+                <ion-label>2 Points</ion-label>
+                <ion-radio slot="start" value="2"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>3 Points</ion-label>
+                <ion-radio slot="start" value="3"></ion-radio>
+              </ion-item>
+              <ion-item lines="None">
+                <ion-label>4 Points</ion-label>
+                <ion-radio slot="start" value="4"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </div>
+        </div>
+        <br>
+
+        <div formArrayName="ranges" *ngFor="let item of rows.controls; let i = index;" class="margin-bottom">
+          <div [formGroupName]="i">
+            <div class="various-form-inputs-container">
+
+              <div class="various-form-inputs-container">
+                <ion-radio-group formControlName="selectInput">
+                  <ion-label class="radio-label">Select Input</ion-label>
+                  <ion-item>
+                    <ion-label>Measured</ion-label>
+                    <ion-radio slot="start" value="measured"></ion-radio>
+                  </ion-item>
+                  <!-- <ion-item>
+                    <ion-label>Visual</ion-label>
+                    <ion-radio slot="start" value="visual"></ion-radio>
+                  </ion-item> -->
+                  <ion-item *ngIf="this.dimensionalType.gauge.enabled && i < this.dimensionalType.gauge.count">
+                    <ion-label>Gauge</ion-label>
+                    <ion-radio slot="start" value="gauge"></ion-radio>
+                  </ion-item>
+                  <ion-item lines="None">
+                    <ion-label>N/A</ion-label>
+                    <ion-radio slot="start" value="notApplicable"></ion-radio>
+                  </ion-item>
+                </ion-radio-group>
+              </div>
+
+              <ng-container *ngIf="item.value.selectInput === 'measured'">
+                <br>
+                <ion-label class="radio-label">{{alphabet[i]}}</ion-label>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col>
+                      <ion-item>
+                        <ion-input formControlName="deg0"
+                                    placeholder="0°">
+                        </ion-input>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col *ngIf="form.value.MEASUREMENT_POINT !== '3'">
+                      <ion-item>
+                        <ion-input formControlName="deg90"
+                                    placeholder="90°">
+                        </ion-input>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col *ngIf="form.value.MEASUREMENT_POINT >= '3'">
+                      <ion-item>
+                        <ion-input formControlName="deg120"
+                                    placeholder="120°">
+                        </ion-input>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col *ngIf="form.value.MEASUREMENT_POINT >= '3'">
+                      <ion-item>
+                        <ion-input formControlName="deg240"
+                                    placeholder="240°">
+                        </ion-input>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ng-container>
+
+              <ng-container *ngIf="item.value.selectInput === 'visual'">
+                <br>
+                  <ion-radio-group formControlName="visual">
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col size="6">
+                          <ion-item>
+                            <ion-label>Pass</ion-label>
+                            <ion-radio slot="start" value="pass"></ion-radio>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size="6">
+                          <ion-item>
+                            <ion-label>Fail</ion-label>
+                            <ion-radio slot="start" value="fail"></ion-radio>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-radio-group>
+              </ng-container>
+
+              <ng-container *ngIf="item.value.selectInput === 'gauge'">
+                <br>
+                  <ion-radio-group formControlName="gauge">
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col size="6">
+                          <ion-item>
+                            <ion-label>Pass</ion-label>
+                            <ion-radio slot="start" value="pass"></ion-radio>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col size="6">
+                          <ion-item>
+                            <ion-label>Fail</ion-label>
+                            <ion-radio slot="start" value="fail"></ion-radio>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-radio-group>
+              </ng-container>
+
+            </div>
+          </div>
+        </div>
+        <ion-item class="select-field-item"
+                  [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['MICROMETER_1'].invalid}">
+          <ion-label position="stacked">Micrometer Serial Number</ion-label>
+          <ion-input formControlName="MICROMETER_1" placeholder="type here..."></ion-input>
+        </ion-item>
+        <ion-item *ngIf="this.dimensionalType.microSn2"
+                  class="select-field-item"
+                  [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['MICROMETER_2'].invalid}">
+          <ion-label position="stacked">Micrometer Serial Number</ion-label>
+          <ion-input formControlName="MICROMETER_2" placeholder="type here..."></ion-input>
+        </ion-item>
+        <ion-item *ngIf="this.dimensionalType.gauge.enabled"
+                  class="select-field-item"
+                  [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['GAUGE_SERIAL_NUMBER'].invalid}">
+          <ion-label position="stacked">Gauge Serial Number</ion-label>
+          <ion-input formControlName="GAUGE_SERIAL_NUMBER" placeholder="type here..."></ion-input>
+        </ion-item>
+      </div>
+    </form>
+
+  </div>
+</ion-content>
+
+<ion-footer>
+  <app-footer-dimensional [currentRoute]="1"
+                          [isFirstRoute]="true"
+                          [isFinalRoute]="true"
+                          [isFormValid]="validForm"
+                          validationMessage="Please complete all required fields."
+                          (nextClicked)="navigateToNext($event)">
+  </app-footer-dimensional>
+</ion-footer>

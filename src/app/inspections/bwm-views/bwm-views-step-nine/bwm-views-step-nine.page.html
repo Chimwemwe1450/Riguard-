@@ -1,0 +1,82 @@
+<ion-header>
+  <app-header-inspections></app-header-inspections>
+</ion-header>
+
+<div class="header-container fixed-header" slot="fixed">
+  <div class="page-heading">
+    <app-content-header [heading]="heading"
+                        [stepCount]="stepCount"
+                        [currentStep]="step">
+    </app-content-header>
+  </div>
+</div>
+
+<ion-content>
+  <div class="page-container">
+    <div class="top-form-inputs">
+      <h5>Step {{step}} - {{stepDescription}}</h5>
+      <ion-list>
+        <ion-item class="item-item" lines="None">
+          <ion-avatar>
+            <ion-icon name="reader-outline"></ion-icon>
+          </ion-avatar>
+          <ion-label>
+            <b>Reference Procedure</b><br>
+            {{critProcedure.rp}}
+          </ion-label>
+        </ion-item>
+        <ion-item class="item-item" lines="None">
+          <ion-avatar>
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+          </ion-avatar>
+          <ion-label>
+            <b>Acceptance Criteria</b><br>
+            {{critProcedure.ac}}
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <form [formGroup]="form">
+      <div class="form-inputs">
+        <div [ngClass]="{'invalid-input':navigateNext && form.controls['MAIN_TUBE_PIN_SIDE_FORM_2_STATUS'].invalid}">
+          <ion-radio-group formControlName="MAIN_TUBE_PIN_SIDE_FORM_2_STATUS" value="accept">
+            <ion-item class="item-item">
+              <ion-label>Accept</ion-label>
+              <ion-radio slot="start" value="accept"></ion-radio>
+            </ion-item>
+            <ion-item class="item-item">
+              <ion-label>Reject</ion-label>
+              <ion-radio slot="start" value="reject"></ion-radio>
+            </ion-item>
+            <ion-item class="item-item" lines="None">
+              <ion-label>Engineer Review</ion-label>
+              <ion-radio slot="start" value="review"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </div>
+        <br>
+        <br>
+        <ion-item class="input-field-item"
+                  [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['notes'].invalid}">
+          <ion-label position="stacked">Notes</ion-label>
+          <ion-textarea formControlName="notes"
+                        placeholder="type here..."
+                        rows="3">
+          </ion-textarea>
+        </ion-item>
+      </div>
+    </form>
+
+  </div>
+</ion-content>
+
+<ion-footer>
+  <app-bwm-footer [currentRoute]="step"
+                  [isFirstRoute]="false"
+                  [isFinalRoute]="true"
+                  [isFormValid]="validForm"
+                  validationMessage="Please complete all required fields."
+                  (nextClicked)="navigateToNext($event)">
+  </app-bwm-footer>
+</ion-footer>

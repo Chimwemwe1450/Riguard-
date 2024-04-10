@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4">
+        </ion-col>
+        <ion-col size="4" class="toolbar-logo-container">
+          <div class="toolbar-logo">
+            <ion-img src="/assets/logos/logo.png"></ion-img>
+          </div>
+        </ion-col>
+        <ion-col size="4">
+          <div class="toolbar-buttons">
+            <ion-button (click)="dismissModal()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="page-centered">
+    <div class="center-text modal-title">
+      Choose Any
+    </div>
+
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label>
+          RISER TAG
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-item *ngFor="let value of filterValues.riserTag" class="filter-values">
+        <ion-label>{{value.value}}</ion-label>
+        <ion-checkbox [checked]="value.checked"
+                      [(ngModel)]="value.checked">
+        </ion-checkbox>
+      </ion-item>
+    </ion-item-group>
+
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label>
+          SUB ASSEMBLY
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-item *ngFor="let value of filterValues.subAssembly" class="filter-values">
+        <ion-label>{{value.value}}</ion-label>
+        <ion-checkbox [checked]="value.checked"
+                      [(ngModel)]="value.checked">
+        </ion-checkbox>
+      </ion-item>
+    </ion-item-group>
+
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label>
+          COMPONENT
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-item *ngFor="let value of filterValues.component" class="filter-values">
+        <ion-label>{{value.value}}</ion-label>
+        <ion-checkbox [checked]="value.checked"
+                      [(ngModel)]="value.checked">
+        </ion-checkbox>
+      </ion-item>
+    </ion-item-group>
+
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label>
+          TYPE OF RECORD
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-item *ngFor="let value of filterValues.recordType" class="filter-values">
+        <ion-label>{{value.value}}</ion-label>
+        <ion-checkbox [checked]="value.checked"
+                      [(ngModel)]="value.checked">
+        </ion-checkbox>
+      </ion-item>
+    </ion-item-group>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <div class="inline-buttons">
+    <ion-button fill="solid" color="primary" (click)="onReset()">Reset</ion-button>
+    <ion-button fill="solid" color="secondary" (click)="onSubmit()">Filter</ion-button>
+  </div>
+</ion-footer>

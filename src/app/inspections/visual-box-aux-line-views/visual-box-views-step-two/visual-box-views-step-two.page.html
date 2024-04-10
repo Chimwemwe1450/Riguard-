@@ -1,0 +1,58 @@
+<ion-header>
+    <app-header-inspections></app-header-inspections>
+</ion-header>
+
+<div class="header-container fixed-header" slot="fixed">
+    <div class="page-heading">
+        <app-content-header [heading]="heading" [stepCount]="stepCount" [currentStep]="step">
+        </app-content-header>
+    </div>
+</div>
+
+<ion-content>
+    <div class="page-container">
+        <div class="top-form-inputs">
+            <h5 class="center-text">Step {{step}} - {{stepDescription}}</h5>
+        </div>
+
+        <form [formGroup]="form">
+            <div class="form-inputs">
+                <figure>
+                    <ion-img class="views-image-85" src="/assets/images/visual_180_360.png"></ion-img>
+                    <br>
+                    <figcaption>Insert picture of seal area from 180° to 360°</figcaption>
+                </figure>
+
+                <div class="center-text">
+                  <app-file-upload (imagePicked)="imagePicked($event)">
+                  </app-file-upload>
+                </div>
+                <br>
+
+                <ion-grid>
+                    <ion-row>
+                        <ion-col size="6" *ngFor="let photo of photos; index as i">
+                            <ion-icon name="close-outline" (click)="deleteImage(i)" class="image-close-button">
+                            </ion-icon>
+                            <ion-img [src]="photo"></ion-img>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+                <p *ngIf="!photos?.length"
+                   class="center-text caption-text"
+                   [ngClass]="{'invalid-input':navigateNext && form.controls['images360'].invalid}">No Images Found</p>
+            </div>
+        </form>
+
+    </div>
+</ion-content>
+
+<ion-footer>
+    <app-footer-visual-box [currentRoute]="step"
+                           [isFirstRoute]="false"
+                           [isFinalRoute]="false"
+                           [isFormValid]="validForm"
+                           validationMessage="Please add at least 1 image."
+                           (nextClicked)="navigateToNext($event)">
+    </app-footer-visual-box>
+</ion-footer>

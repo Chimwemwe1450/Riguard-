@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4">
+        </ion-col>
+        <ion-col size="4" class="toolbar-logo-container">
+          <div class="toolbar-logo">
+            <ion-img src="/assets/logos/logo.png"></ion-img>
+          </div>
+        </ion-col>
+        <ion-col size="4">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="page-centered">
+    <div class="center-text modal-title">
+      Sync Report
+    </div>
+  </div>
+
+  <ion-grid class="no-padding inspections-list">
+    <ion-row class="row-heading fixed-heading">
+      <ion-col size="2">Riser Tag</ion-col>
+      <ion-col size="4">Component</ion-col>
+      <ion-col size="4">Record Name</ion-col>
+      <ion-col size="2">Synced</ion-col>
+    </ion-row>
+
+    <div class="grid-data-rows">
+      <ion-row *ngFor="let data of syncReportData"
+               class="row-data"
+               [ngClass]="{'row-background-failed': !data.syncSuccess} ">
+        <ion-col size="2">{{data.riserTag}}</ion-col>
+        <ion-col size="4">{{data.component}}</ion-col>
+        <ion-col size="4">{{data.recordName}}</ion-col>
+        <ion-col *ngIf="data.syncSuccess" size="2">
+          <ion-icon color="success"
+                    name="checkbox-outline">
+          </ion-icon>
+        </ion-col>
+        <ion-col *ngIf="!data.syncSuccess" size="2">
+          <ion-icon name="close-circle-outline">
+          </ion-icon>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-grid>
+
+</ion-content>
+
+<ion-footer>
+  <div class="toolbar-buttons">
+    <ion-button fill="solid"
+                color="secondary"
+                (click)="dismissModal()">Done
+    </ion-button>
+  </div>
+</ion-footer>

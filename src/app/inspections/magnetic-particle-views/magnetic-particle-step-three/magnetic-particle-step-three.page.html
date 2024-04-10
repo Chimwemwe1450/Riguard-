@@ -1,0 +1,89 @@
+<ion-header>
+    <app-header-inspections></app-header-inspections>
+</ion-header>
+
+<div class="header-container fixed-header" slot="fixed">
+    <div class="page-heading">
+        <app-content-header [heading]="heading" [stepCount]="stepCount" [currentStep]="step">
+        </app-content-header>
+    </div>
+</div>
+
+<ion-content>
+    <div class="page-container">
+        <div class="top-form-inputs">
+            <h5>Step {{step}} - {{stepDescription}}</h5>
+            <ion-button (click)="usePreviousData()"
+                        color="secondary">
+                <ion-icon slot="start"
+                          name="reload-outline"
+                          class="smaller-icon">
+                </ion-icon>
+                Use previous data
+            </ion-button>
+        </div>
+
+        <form [formGroup]="form">
+            <div class="form-inputs">
+                <ion-item class="select-field-item"
+                          [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['LIGHT_LUX'].invalid}">
+                    <ion-label position="stacked">Light Lux</ion-label>
+                    <ion-input type="number" formControlName="LIGHT_LUX" placeholder="type here..."></ion-input>
+                </ion-item>
+
+                <ion-item class="select-field-item"
+                          [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['LIGHT_LUX_SERIAL_NUMBER'].invalid}">
+                    <ion-label position="stacked">Light Lux Serial Number</ion-label>
+                    <ion-input formControlName="LIGHT_LUX_SERIAL_NUMBER" placeholder="type here..."></ion-input>
+                </ion-item>
+
+                <ion-item class="select-field-item"
+                          [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['UV'].invalid}">
+                    <ion-label position="stacked">UV µW/cm²</ion-label>
+                    <ion-input type="number" formControlName="UV" placeholder="type here..."></ion-input>
+                </ion-item>
+
+                <ion-item class="select-field-item"
+                          [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['UV_SERIAL_NUMBER'].invalid}">
+                    <ion-label position="stacked">UV Serial Number</ion-label>
+                    <ion-input formControlName="UV_SERIAL_NUMBER" placeholder="type here..."></ion-input>
+                </ion-item>
+
+                <ion-item class="select-field-item"
+                          [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['VERIFICATION_LIFT_TEST'].invalid}">
+                    <ion-label position="stacked">Verification Lift Test</ion-label>
+                    <ion-input formControlName="VERIFICATION_LIFT_TEST" placeholder="type here..."></ion-input>
+                </ion-item>
+
+                <ion-item class="select-field-item"
+                          [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['FIELD_INDICATOR'].invalid}">
+                    <ion-label position="stacked">Field Indicator</ion-label>
+                    <ion-input formControlName="FIELD_INDICATOR" placeholder="type here..."></ion-input>
+                </ion-item>
+
+                <ion-item class="select-field-item"
+                          [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['TEST_EQUIPMENT'].invalid}">
+                    <ion-label position="stacked">Test Equipment</ion-label>
+                    <ion-input formControlName="TEST_EQUIPMENT" placeholder="type here..." type="text" maxlength="19"></ion-input>
+                </ion-item>
+
+                <ion-item class="select-field-item"
+                        [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['TEST_EQUIPMENT_SERIAL_NUMBER'].invalid}">
+                    <ion-label position="stacked">Test Equipment Serial Number</ion-label>
+                    <ion-input formControlName="TEST_EQUIPMENT_SERIAL_NUMBER" placeholder="type here..."></ion-input>
+                </ion-item>
+            </div>
+        </form>
+
+    </div>
+</ion-content>
+
+<ion-footer>
+    <app-footer-magnetic [currentRoute]="step"
+                         [isFirstRoute]="false"
+                         [isFinalRoute]="false"
+                         [isFormValid]="validForm"
+                         validationMessage="Please complete all required fields."
+                         (nextClicked)="navigateToNext($event)">
+    </app-footer-magnetic>
+</ion-footer>

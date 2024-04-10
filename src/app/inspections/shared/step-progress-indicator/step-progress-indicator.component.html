@@ -1,0 +1,8 @@
+<div class="container">
+  <div class="progress">
+    <div #percent class="percent"></div>
+  </div>
+  <div #steps class="steps">
+    <div *ngFor="let step of stepCountArray" class="step" id="{{step}}"></div>
+  </div>
+</div>

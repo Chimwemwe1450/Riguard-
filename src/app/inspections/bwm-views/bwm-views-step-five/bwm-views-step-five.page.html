@@ -1,0 +1,156 @@
+<ion-header>
+  <app-header-inspections></app-header-inspections>
+</ion-header>
+
+<div class="header-container fixed-header" slot="fixed">
+  <div class="page-heading">
+    <app-content-header [heading]="heading"
+                        [stepCount]="stepCount"
+                        [currentStep]="step">
+    </app-content-header>
+  </div>
+</div>
+
+<ion-content>
+  <div class="page-container">
+    <div class="top-form-inputs">
+      <h5>Step {{step}} - {{stepDescription}}</h5>
+      <ion-list>
+        <ion-item class="item-item" lines="None">
+          <ion-avatar>
+            <ion-icon name="reader-outline"></ion-icon>
+          </ion-avatar>
+          <ion-label>
+            <b>Reference Procedure</b><br>
+            {{critProcedure.rp}}
+          </ion-label>
+        </ion-item>
+        <ion-item class="item-item" lines="None">
+          <ion-avatar>
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+          </ion-avatar>
+          <ion-label>
+            <b>Acceptance Criteria</b><br>
+            {{critProcedure.ac}}
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <form [formGroup]="form">
+      <div class="form-inputs">
+        <div [ngClass]="{'invalid-input':navigateNext && form.controls['MAIN_TUBE_PIN_SIDE_CONNECTOR_FORM_2_STATUS'].invalid}">
+          <ion-radio-group formControlName="MAIN_TUBE_PIN_SIDE_CONNECTOR_FORM_2_STATUS" value="accept">
+            <ion-item class="item-item">
+              <ion-label>Accept</ion-label>
+              <ion-radio slot="start" value="accept"></ion-radio>
+            </ion-item>
+            <ion-item class="item-item">
+              <ion-label>Reject</ion-label>
+              <ion-radio slot="start" value="reject"></ion-radio>
+            </ion-item>
+            <ion-item class="item-item" lines="None">
+              <ion-label>Engineer Review</ion-label>
+              <ion-radio slot="start" value="review"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </div>
+        <br>
+        <br>
+        <ion-grid class="no-padding component-list">
+          <ion-row class="row-heading fixed-heading">
+            <ion-col><b>Component</b></ion-col>
+            <ion-col><b>Status</b></ion-col>
+          </ion-row>
+
+          <div class="grid-data-rows">
+            <ion-row class="row-data">
+              <ion-col>Main Pin Alignment</ion-col>
+              <ion-col>REJECT</ion-col>
+            </ion-row>
+            <ion-row class="row-data">
+              <ion-col>Choke Stop Nut &</ion-col>
+              <ion-col>ENGINEER REVIEW</ion-col>
+            </ion-row>
+            <ion-row class="row-data">
+              <ion-col>Kill Stop Nut &</ion-col>
+              <ion-col>REJECT</ion-col>
+            </ion-row>
+            <ion-row class="row-data">
+              <ion-col>Booster Stop Nut &</ion-col>
+              <ion-col>REJECT</ion-col>
+            </ion-row>
+            <ion-row class="row-data">
+              <ion-col>HYD 2 Stop Nut &</ion-col>
+              <ion-col>REJECT</ion-col>
+            </ion-row>
+            <ion-row class="row-data">
+              <ion-col>Kill Pin Connector</ion-col>
+              <ion-col>REJECT</ion-col>
+            </ion-row>
+          </div>
+
+        </ion-grid>
+        <br>
+        <br>
+        <ion-item class="input-field-item"
+                  [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['notesExclHyd'].invalid}">
+          <ion-label position="stacked">Notes</ion-label>
+          <ion-textarea formControlName="notesExclHyd"
+                        placeholder="type here..."
+                        rows="3">
+          </ion-textarea>
+        </ion-item>
+
+        <ion-item class="input-field-item"
+                  [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['inspectionArea'].invalid}">
+          <ion-label position="stacked">Inspection Area</ion-label>
+          <ion-select formControlName="inspectionArea" placeholder="Select Inspection Area">
+            <ion-select-option value="main pin alignment key">Main Pin Alignment Key</ion-select-option>
+            <ion-select-option value="choke stop nut">Choke Stop Nut & Thread</ion-select-option>
+            <ion-select-option value="kill stop nut">Kill Stop Nut & Thread</ion-select-option>
+            <ion-select-option value="booster stop nute">Booster Stop Nut & Thread</ion-select-option>
+            <ion-select-option value="hyd 2 stop nut">Hyd 2 Stop Nut & Thread</ion-select-option>
+            <ion-select-option value="kill pin connector">Kill Pin Connector</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <br>
+        <div class="center-text">
+          <app-file-upload (imagePicked)="imagePicked($event)">
+          </app-file-upload>
+        </div>
+        <br>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col
+              size="6"
+              *ngFor="let photo of photos; index as i">
+              <ion-icon name="close-outline"
+                        (click)="deleteImage(i)"
+                        class="image-close-button">
+              </ion-icon>
+              <ion-img [src]="photo"></ion-img>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <p *ngIf="!photos?.length"
+           class="center-text caption-text"
+           [ngClass]="{'invalid-input':navigateNext && form.controls['images'].invalid}">No Images Found</p>
+      </div>
+    </form>
+
+
+
+  </div>
+</ion-content>
+
+<ion-footer>
+  <app-bwm-footer [currentRoute]="step"
+                  [isFirstRoute]="false"
+                  [isFinalRoute]="false"
+                  [isFormValid]="validForm"
+                  validationMessage="Please complete all required fields."
+                  (nextClicked)="navigateToNext($event)">
+  </app-bwm-footer>
+</ion-footer>

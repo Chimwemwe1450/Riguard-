@@ -1,0 +1,23 @@
+<div class="footer-button-group">
+  <ion-button (click)="onExit()"
+              fill="solid"
+              color="tertiary">Save & Exit
+  </ion-button>
+  <div>
+    <ion-button *ngIf="!isFirstRoute"
+                (click)="onPrevious()"
+                fill="solid"
+                color="secondary">Previous
+    </ion-button>
+    <ion-button *ngIf="!isFinalRoute"
+                (click)="onNext()"
+                fill="solid"
+                color="secondary">Next
+    </ion-button>
+    <ion-button *ngIf="isFinalRoute"
+                (click)="onSubmit()"
+                fill="solid"
+                color="secondary">Submit
+    </ion-button>
+  </div>
+</div>

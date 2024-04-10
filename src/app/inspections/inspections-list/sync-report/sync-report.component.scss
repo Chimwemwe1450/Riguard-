@@ -1,0 +1,23 @@
+.inspections-list {
+  font-size: 12px;
+}
+
+.page-centered {
+  padding: 30px;
+  text-align: center;
+}
+
+.modal-toolbar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.row-background-failed {
+  background: var(--ion-color-danger);
+  color: #fff;
+}

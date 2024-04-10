@@ -1,0 +1,86 @@
+<ion-header>
+    <app-header-inspections></app-header-inspections>
+</ion-header>
+
+<div class="header-container fixed-header" slot="fixed">
+    <div class="page-heading">
+        <app-content-header [heading]="heading" [stepCount]="stepCount" [currentStep]="step">
+        </app-content-header>
+    </div>
+</div>
+
+<ion-content>
+    <div class="page-container">
+        <div class="top-form-inputs">
+            <h5>Step {{step}} - {{stepDescription}}</h5>
+            <ion-list>
+                <ion-item class="item-item" lines="None">
+                    <ion-avatar>
+                        <ion-icon name="reader-outline"></ion-icon>
+                    </ion-avatar>
+                    <ion-label>
+                        <b>Reference Procedure</b><br> {{critProcedure.rp}}
+                    </ion-label>
+                </ion-item>
+                <ion-item class="item-item" lines="None">
+                    <ion-avatar>
+                        <ion-icon name="checkmark-circle-outline"></ion-icon>
+                    </ion-avatar>
+                    <ion-label>
+                        <b>Acceptance Criteria</b><br> {{critProcedure.ac}}
+                    </ion-label>
+                </ion-item>
+            </ion-list>
+        </div>
+
+        <form [formGroup]="form">
+            <div class="form-inputs">
+                <ion-item class="input-field-item"
+                          [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['COMPONENT_TRACEABILITY'].invalid}">
+                    <ion-label position="stacked">Component/Traceability Serial Number</ion-label>
+                    <ion-input formControlName="COMPONENT_TRACEABILITY" placeholder="type here..."></ion-input>
+                </ion-item>
+                <br>
+                <div [ngClass]="{'invalid-input':navigateNext && form.controls['INSPECTION_STATUS'].invalid}">
+                  <ion-radio-group formControlName="INSPECTION_STATUS" value="accept">
+                    <ion-item>
+                        <ion-label>Accept</ion-label>
+                        <ion-radio slot="start" value="Acceptable"></ion-radio>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Reject</ion-label>
+                        <ion-radio slot="start" value="Reject"></ion-radio>
+                    </ion-item>
+                    <ion-item lines="None">
+                        <ion-label>Engineer Review</ion-label>
+                        <ion-radio slot="start" value="Engineer_Review"></ion-radio>
+                    </ion-item>
+                </ion-radio-group>
+                </div>
+                <br>
+                <br>
+
+                <ion-label>
+                    <b>Remarks</b>
+                </ion-label>
+                <div *ngIf="form.value.INSPECTION_STATUS" class="inline-content">
+                    <ion-icon name="checkmark-outline" class="padding-right"></ion-icon>
+                    <p *ngIf="form.value.INSPECTION_STATUS == 'Acceptable'">No relevant indication found at the time of inspection</p>
+                    <p *ngIf="form.value.INSPECTION_STATUS == 'Reject'">Relevant indication found at the time of inspection</p>
+                    <p *ngIf="form.value.INSPECTION_STATUS == 'Engineer_Review'">Engineer review required</p>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</ion-content>
+
+<ion-footer>
+    <app-footer-magnetic [currentRoute]="step"
+                         [isFirstRoute]="false"
+                         [isFinalRoute]="true"
+                         [isFormValid]="validForm"
+                         validationMessage="Please complete all required fields."
+                         (nextClicked)="navigateToNext($event)">
+    </app-footer-magnetic>
+</ion-footer>

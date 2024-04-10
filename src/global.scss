@@ -1,0 +1,348 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+ion-toolbar {
+  --background: var(--primary);
+  padding: 0 15px 0 15px;
+}
+
+ion-footer {
+  --background: none;
+  background: var(--primary);
+  padding: 5px 15px 5px 15px;
+}
+
+ion-app {
+  --ion-background-color: #fff;
+}
+
+ion-list {
+  --background: #fff;
+}
+
+ion-content {
+  --color: #000;
+}
+
+ion-item {
+  --background: #fff;
+  --color: #000;
+}
+
+.item-item {
+  --background: #fff;
+  --color: #000;
+}
+
+.toolbar-logo {
+  display: flex;
+  justify-content: center;
+}
+
+.toolbar-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.toolbar-logo-container {
+  display: flex;
+  align-items: center;
+}
+
+ion-icon {
+  font-size: 2rem;
+}
+
+figcaption {
+  font-size: 12px;
+  text-align: center;
+}
+
+.caption-text {
+  font-size: 12px;
+}
+
+.page-container {
+  padding: 15px;
+  background: #fff;
+  color: #000;
+}
+
+.header-container {
+  padding: 10px 15px;
+  background: #fff;
+  color: #000;
+}
+
+.page-heading {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.primary-color {
+  color: var(--primary);
+}
+.secondary-color {
+  color: var(--secondary);
+}
+.tertiary-color {
+  color: var(--tertiary);
+}
+
+
+// GRID //
+.no-padding {
+  padding: 0;
+}
+
+.row-heading,
+.row-data {
+  padding: 5px;
+  align-items: center;
+}
+
+.row-heading {
+  font-weight: bold;
+  background: var(--tertiary);
+}
+
+.row-data:nth-child(even) {
+  background: #f3f3f3;
+}
+
+.fixed-heading {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+//
+
+.smaller-icon {
+  font-size: 1rem;
+}
+.small-icon {
+  font-size: 1.3rem;
+}
+
+.inline-buttons {
+  display: flex;
+  ion-button {
+    width: 100%;
+  }
+}
+
+.start-and-end-buttons {
+  display: flex;
+  justify-content: space-between;
+  ion-button {
+    width: 25%;
+  }
+}
+
+.footer-button-group {
+  display: flex;
+  justify-content: space-between;
+  ion-button {
+    width: 95px;
+  }
+}
+.inspections-footer-button-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.form-inputs-container {
+  border: 1px solid var(--tertiary);
+}
+
+.various-form-inputs-container {
+  padding: 15px;
+  border: 1px solid var(--tertiary);
+}
+
+.form-inputs {
+  padding: 15px 20px 15px 20px;
+  margin-top: 10px;
+}
+
+.top-form-inputs {
+  padding: 0 20px 0 20px;
+}
+
+.various-form-inputs {
+  padding: 15px;
+}
+
+.form-inputs-grid {
+  margin-top: 10px;
+}
+
+.form-inputs-container > ion-label {
+    width: 100%;
+    display: block;
+    background: var(--primary);
+    color: #fff;
+    padding: 7px;
+}
+
+ion-button {
+  letter-spacing: inherit;
+}
+
+.inline-content {
+  display: flex;
+  align-items: center;
+}
+
+.padding-left {
+  padding-left: 15px;
+}
+.padding-right {
+  padding-right: 15px;
+}
+
+.margin-bottom {
+  margin-bottom: 15px;
+}
+.margin-top {
+  margin-top: 15px;
+}
+
+.views-image-45 {
+  width: 45%;
+  margin: auto;
+}
+.views-image-65 {
+  width: 65%;
+  margin: auto;
+}
+.views-image-85 {
+  width: 85%;
+  margin: auto;
+}
+.views-image-100 {
+  width: 100%;
+  margin: auto;
+}
+
+.input-field-item {
+  --border-style: none;
+  border: 1px solid var(--tertiary);
+  padding-bottom: 1px;
+  margin-bottom: 10px;
+  margin-top: 2px;
+  --background: #fff;
+  --color: #000;
+}
+.select-field-item {
+  --border-style: none;
+  border: 1px solid var(--tertiary);
+  margin-bottom: 10px;
+  --background: #fff;
+  --color: #000;
+}
+.item-item {
+  --padding-start: 0;
+  --padding-end: 0;
+  --inner-padding-start: 0;
+  --inner-padding-end: 0;
+}
+
+.image-close-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 10px;
+  background: #fff;
+  border-radius: 50%;
+  font-size: 1.5em;
+  color: var(--primary);
+}
+
+
+// RADIO BUTTON //
+ion-radio {
+  margin-inline-end: 15px;
+}
+
+.radio-label {
+  font-size: 12px;
+}
+
+ion-radio-group ion-item {
+  --padding-start: 0;
+  --padding-end: 0;
+  --inner-padding-start: 0;
+  --inner-padding-end: 0;
+  --background: #fff;
+  --color: #000;
+}
+
+.alert-radio-group.sc-ion-alert-md {
+  max-height: 270px;
+}
+
+.alert-radio-label.sc-ion-alert-md {
+  text-overflow: unset;
+  white-space: break-spaces;
+  color: #000;
+}
+// -- //
+
+.alert-title.sc-ion-alert-md {
+  color: #000;
+}
+
+.content-heading {
+  background: var(--tertiary);
+  padding: 5px;
+  text-align: center;
+}
+
+.ellipse-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.invalid-input {
+  // border: 1px solid var(--ion-color-danger);
+  box-shadow: 0px 0px 0px 2px var(--ion-color-danger);
+}
+
+
+// TOAST MESSAGES //
+.toast-style {
+  top: -60px;
+  text-align: center;
+}
+// -- //

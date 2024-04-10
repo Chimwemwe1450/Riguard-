@@ -1,0 +1,139 @@
+<ion-header>
+    <app-header-inspections></app-header-inspections>
+</ion-header>
+
+<div class="header-container fixed-header" slot="fixed">
+    <div class="page-heading">
+        <app-content-header [heading]="heading" [stepCount]="stepCount" [currentStep]="step">
+        </app-content-header>
+    </div>
+</div>
+
+<ion-content>
+    <div class="page-container">
+        <div class="top-form-inputs">
+            <h5>Step {{step}} - {{stepDescription}}</h5>
+            <ion-button (click)="usePreviousData()"
+                        color="secondary">
+                <ion-icon slot="start"
+                          name="reload-outline"
+                          class="smaller-icon">
+                </ion-icon>
+                Use previous data
+            </ion-button>
+        </div>
+
+        <form [formGroup]="form">
+            <div class="form-inputs">
+                <div class="various-form-inputs-container">
+                    <ion-radio-group formControlName="METHOD_1" value="AC">
+                        <ion-label class="radio-label">Method</ion-label>
+                        <ion-grid>
+                            <ion-row [ngClass]="{'invalid-input':navigateNext && form.controls['METHOD_1'].invalid}">
+                                <ion-col>
+                                    <ion-item>
+                                        <ion-label>AC</ion-label>
+                                        <ion-radio slot="start" value="AC"></ion-radio>
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col>
+                                    <ion-item>
+                                        <ion-label>DC</ion-label>
+                                        <ion-radio slot="start" value="DC"></ion-radio>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-radio-group>
+                    <ion-radio-group formControlName="METHOD_2" value="Coil">
+                        <ion-grid>
+                            <ion-row [ngClass]="{'invalid-input':navigateNext && form.controls['METHOD_2'].invalid}">
+                                <ion-col>
+                                    <ion-item>
+                                        <ion-label>Coil</ion-label>
+                                        <ion-radio slot="start" value="Coil"></ion-radio>
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col>
+                                    <ion-item>
+                                        <ion-label>Yoke</ion-label>
+                                        <ion-radio slot="start" value="Yoke"></ion-radio>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-radio-group>
+                    <ion-radio-group formControlName="METHOD_3" value="Wet">
+                        <ion-grid>
+                            <ion-row [ngClass]="{'invalid-input':navigateNext && form.controls['METHOD_3'].invalid}">
+                                <ion-col>
+                                    <ion-item>
+                                        <ion-label>Wet</ion-label>
+                                        <ion-radio slot="start" value="Wet"></ion-radio>
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col>
+                                    <ion-item>
+                                        <ion-label>Dry</ion-label>
+                                        <ion-radio slot="start" value="Dry"></ion-radio>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-radio-group>
+                    <ion-radio-group formControlName="METHOD_4" value="Contrast">
+                        <ion-grid>
+                            <ion-row [ngClass]="{'invalid-input':navigateNext && form.controls['METHOD_4'].invalid}">
+                                <ion-col>
+                                    <ion-item>
+                                        <ion-label>Florescent</ion-label>
+                                        <ion-radio slot="start" value="Fluorescent"></ion-radio>
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col>
+                                    <ion-item>
+                                        <ion-label>Contrast</ion-label>
+                                        <ion-radio slot="start" value="Contrast"></ion-radio>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-radio-group>
+                </div>
+                <br>
+                <div class="various-form-inputs-container">
+                    <ion-radio-group formControlName="MAGNETISATION" value="Residual">
+                        <ion-label class="radio-label">Magnetisation</ion-label>
+                        <ion-grid>
+                            <ion-row [ngClass]="{'invalid-input':navigateNext && form.controls['MAGNETISATION'].invalid}">
+                                <ion-col>
+                                    <ion-item>
+                                        <ion-label>Continuous</ion-label>
+                                        <ion-radio slot="start" value="Continuous"></ion-radio>
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col>
+                                    <ion-item>
+                                        <ion-label>Residual</ion-label>
+                                        <ion-radio slot="start" value="Residual"></ion-radio>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-radio-group>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</ion-content>
+
+<ion-footer>
+    <app-footer-magnetic [currentRoute]="step"
+                         [isFirstRoute]="false"
+                         [isFinalRoute]="false"
+                         [isFormValid]="validForm"
+                         validationMessage="Please complete all required fields."
+                         (nextClicked)="navigateToNext($event)">
+    </app-footer-magnetic>
+</ion-footer>

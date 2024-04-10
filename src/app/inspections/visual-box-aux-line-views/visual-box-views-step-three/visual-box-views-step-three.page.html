@@ -1,0 +1,201 @@
+<ion-header>
+    <app-header-inspections></app-header-inspections>
+</ion-header>
+
+<div class="header-container fixed-header" slot="fixed">
+    <div class="page-heading">
+        <app-content-header [heading]="heading" [stepCount]="stepCount" [currentStep]="step">
+        </app-content-header>
+    </div>
+</div>
+
+<ion-content>
+    <div class="page-container">
+        <div class="top-form-inputs">
+            <h5>Step {{step}} - {{stepDescription}}</h5>
+            <ion-list>
+                <ion-item class="item-item" lines="None">
+                    <ion-avatar>
+                        <ion-icon name="reader-outline"></ion-icon>
+                    </ion-avatar>
+                    <ion-label>
+                        <b>Reference Procedure</b><br> {{critProcedure.rp}}
+                    </ion-label>
+                </ion-item>
+                <ion-item class="item-item" lines="None">
+                    <ion-avatar>
+                        <ion-icon name="checkmark-circle-outline"></ion-icon>
+                    </ion-avatar>
+                    <ion-label>
+                        <b>Acceptance Criteria</b><br> {{critProcedure.ac}}
+                    </ion-label>
+                </ion-item>
+            </ion-list>
+        </div>
+
+        <form [formGroup]="form">
+            <div class="form-inputs">
+                <ion-item class="input-field-item"
+                          [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['VIS_FORM_1_COMPONENT_TRACEBILITY'].invalid}">
+                    <ion-label position="stacked">Component/Traceability Serial Number</ion-label>
+                    <ion-input formControlName="VIS_FORM_1_COMPONENT_TRACEBILITY" placeholder="type here..."></ion-input>
+                </ion-item>
+                <ion-item class="input-field-item"
+                          [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['VIS_FORM_1_SEAL_AREA'].invalid}">
+                    <ion-label position="stacked">Seal Area</ion-label>
+                    <ion-select formControlName="VIS_FORM_1_SEAL_AREA" placeholder="Select Seal Area">
+                        <ion-select-option value="Carbon steel">Carbon Steel</ion-select-option>
+                        <ion-select-option value="Corrosion resistant alloy">Corrosion Resistant Alloy</ion-select-option>
+                        <ion-select-option value="Stainless steel">Stainless Steel</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <br>
+                <div class="form-inputs-container">
+                    <ion-label>Lead In</ion-label>
+                    <div class="form-inputs">
+                        <ion-item class="input-field-item"
+                                  [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['VIS_FORM_1_LEAD_IN_MECH_DAM'].invalid}">
+                            <ion-label position="stacked">Mechanical Damage</ion-label>
+                            <ion-select formControlName="VIS_FORM_1_LEAD_IN_MECH_DAM" placeholder="select Mechanical Damage">
+                                <ion-select-option value="No Damage">No Damage</ion-select-option>
+                                <ion-select-option value="Light">Light</ion-select-option>
+                                <ion-select-option value="Moderate">Moderate</ion-select-option>
+                                <ion-select-option value="Severe">Severe</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+
+                        <ion-item class="input-field-item"
+                                  [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['VIS_FORM_1_LEAD_IN_PITTING'].invalid}">
+                            <ion-label position="stacked">Pitting</ion-label>
+                            <ion-select formControlName="VIS_FORM_1_LEAD_IN_PITTING" placeholder="select Pitting">
+                                <ion-select-option value="No pitting">No Pitting</ion-select-option>
+                                <ion-select-option value="Light">Light</ion-select-option>
+                                <ion-select-option value="Moderate">Moderate</ion-select-option>
+                                <ion-select-option value="Severe">Severe</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                    </div>
+                </div>
+                <br>
+                <div class="form-inputs-container">
+                    <ion-label>Grooves</ion-label>
+                    <div class="form-inputs">
+                        <ion-item class="input-field-item"
+                                  [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['VIS_FORM_1_GROOVE_SCORING'].invalid}">
+                            <ion-label position="stacked">Scoring</ion-label>
+                            <ion-select formControlName="VIS_FORM_1_GROOVE_SCORING" placeholder="Select Scoring">
+                                <ion-select-option value="No scoring">No Scoring</ion-select-option>
+                                <ion-select-option value="Light">Light</ion-select-option>
+                                <ion-select-option value="Moderate">Moderate</ion-select-option>
+                                <ion-select-option value="Severe">Severe</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+
+                        <ion-item class="input-field-item"
+                                  [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['VIS_FORM_1_GROOVE_PITTING'].invalid}">
+                            <ion-label position="stacked">Pitting</ion-label>
+                            <ion-select formControlName="VIS_FORM_1_GROOVE_PITTING" placeholder="Select Pitting">
+                                <ion-select-option value="No pitting">No Pitting</ion-select-option>
+                                <ion-select-option value="Light">Light</ion-select-option>
+                                <ion-select-option value="Moderate">Moderate</ion-select-option>
+                                <ion-select-option value="Severe">Severe</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+
+                        <ion-item class="input-field-item"
+                                  [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['VIS_FORM_1_GROOVE_DAMAGE_CAUSE'].invalid}">
+                            <ion-label position="stacked">Damage caused by improper seal removal</ion-label>
+                            <ion-select formControlName="VIS_FORM_1_GROOVE_DAMAGE_CAUSE" placeholder="Select Galling">
+                                <ion-select-option value="Damage noted">Damage noted</ion-select-option>
+                                <ion-select-option value="No damage">No damage</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                    </div>
+                </div>
+                <br>
+                <div class="form-inputs-container">
+                    <ion-label>Through Bore</ion-label>
+                    <div class="form-inputs">
+                        <ion-item class="input-field-item"
+                                  [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['VIS_FORM_1_THROUGH_SCORING'].invalid}">
+                            <ion-label position="stacked">Scoring</ion-label>
+                            <ion-select formControlName="VIS_FORM_1_THROUGH_SCORING" placeholder="Select Scoring">
+                                <ion-select-option value="No scoring">No Scoring</ion-select-option>
+                                <ion-select-option value="Light">Light</ion-select-option>
+                                <ion-select-option value="Moderate">Moderate</ion-select-option>
+                                <ion-select-option value="Severe">Severe</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+
+                        <ion-item class="input-field-item"
+                                  [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['VIS_FORM_1_THROUGH_PITTING'].invalid}">
+                            <ion-label position="stacked">Pitting</ion-label>
+                            <ion-select formControlName="VIS_FORM_1_THROUGH_PITTING" placeholder="Select Pitting">
+                                <ion-select-option value="No pitting">No Pitting</ion-select-option>
+                                <ion-select-option value="Light">Light</ion-select-option>
+                                <ion-select-option value="Moderate">Moderate</ion-select-option>
+                                <ion-select-option value="Severe">Severe</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+
+                        <ion-item class="input-field-item"
+                                  [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['VIS_FORM_1_THROUGH_GALLING'].invalid}">
+                            <ion-label position="stacked">Galling</ion-label>
+                            <ion-select formControlName="VIS_FORM_1_THROUGH_GALLING" placeholder="Select Galling">
+                                <ion-select-option value="No galling">No Galling</ion-select-option>
+                                <ion-select-option value="Light">Light</ion-select-option>
+                                <ion-select-option value="Moderate">Moderate</ion-select-option>
+                                <ion-select-option value="Severe">Severe</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                    </div>
+                </div>
+                <br>
+                <ion-item class="input-field-item"
+                          [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['VIS_FORM_1_MINOR_REPAIR'].invalid}">
+                    <ion-label position="stacked">Minor Repair</ion-label>
+                    <ion-select formControlName="VIS_FORM_1_MINOR_REPAIR" placeholder="Select Minor Repair">
+                        <ion-select-option value="Dress and polish completed">Dress and polish completed</ion-select-option>
+                        <ion-select-option value="Dress and polish required">Dress and polish required</ion-select-option>
+                        <ion-select-option value="No action required">No action required</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <br>
+                <div [ngClass]="{'invalid-input':navigateNext && form.controls['VIS_FORM_1_STATUS'].invalid}">
+                  <ion-radio-group formControlName="VIS_FORM_1_STATUS" value="accept">
+                    <ion-item>
+                        <ion-label>Accept</ion-label>
+                        <ion-radio slot="start" value="Acceptable"></ion-radio>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Reject</ion-label>
+                        <ion-radio slot="start" value="Reject"></ion-radio>
+                    </ion-item>
+                    <ion-item lines="None">
+                        <ion-label>Engineer Review</ion-label>
+                        <ion-radio slot="start" value="Engineer_Review"></ion-radio>
+                    </ion-item>
+                  </ion-radio-group>
+                </div>
+                <br>
+                <ion-item class="input-field-item"
+                          [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['VIS_FORM_1_NOTES'].invalid}">
+                    <ion-label position="stacked">Notes</ion-label>
+                    <ion-textarea formControlName="VIS_FORM_1_NOTES" placeholder="type here..." rows="3">
+                    </ion-textarea>
+                </ion-item>
+            </div>
+        </form>
+
+    </div>
+</ion-content>
+
+<ion-footer>
+    <app-footer-visual-box [currentRoute]="step"
+                           [isFirstRoute]="false"
+                           [isFinalRoute]="true"
+                           [isFormValid]="validForm"
+                           validationMessage="Please complete all required fields."
+                           (nextClicked)="navigateToNext($event)">
+    </app-footer-visual-box>
+</ion-footer>

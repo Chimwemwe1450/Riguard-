@@ -1,0 +1,56 @@
+.inspections-footer {
+  color: var(--tertiary);
+  font-size: 0.8rem;
+}
+
+#footer-button-left {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+#footer-button-right {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+#sync {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#completion-percentage {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.spin-icon {
+  animation-name: spin;
+  animation-duration: 1000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.footer-number-values {
+  width: 30px;
+  background: #444;
+  display: inline-block;
+  text-align: center;
+  border: 1px solid var(--primary);
+}
+
+
+
+@keyframes spin {
+  from {
+      transform:rotate(0deg);
+  }
+  to {
+      transform:rotate(720deg);
+  }
+}

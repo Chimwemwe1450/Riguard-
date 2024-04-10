@@ -1,0 +1,113 @@
+<ion-header>
+    <app-header-inspections></app-header-inspections>
+</ion-header>
+
+<div class="header-container fixed-header" slot="fixed">
+    <div class="page-heading">
+        <app-content-header [heading]="heading" [stepCount]="stepCount" [currentStep]="4">
+        </app-content-header>
+    </div>
+</div>
+
+<ion-content>
+    <div class="page-container">
+        <div class="top-form-inputs">
+            <h5>Step {{step}} - {{stepDescription}}</h5>
+            <ion-button (click)="usePreviousData()"
+                        color="secondary">
+                <ion-icon slot="start"
+                          name="reload-outline"
+                          class="smaller-icon">
+                </ion-icon>
+                Use previous data
+            </ion-button>
+        </div>
+
+        <form [formGroup]="form">
+            <div class="form-inputs">
+                <ion-item class="select-field-item"
+                          [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['TYPE_01'].invalid}">
+                    <ion-label position="stacked">Type 01</ion-label>
+                    <ion-input formControlName="TYPE_01" placeholder="type here..."></ion-input>
+                </ion-item>
+
+                <ion-item class="select-field-item"
+                          [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['BRAND_01'].invalid}">
+                    <ion-label position="stacked">Brand 01</ion-label>
+                    <ion-input formControlName="BRAND_01" placeholder="type here..."></ion-input>
+                </ion-item>
+
+                <ion-item class="select-field-item"
+                          [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['BATCH_01'].invalid}">
+                    <ion-label position="stacked">Batch 01</ion-label>
+                    <ion-input formControlName="BATCH_01" placeholder="type here..."></ion-input>
+                </ion-item>
+
+                <ion-item class="select-field-item"
+                          [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['TYPE_02'].invalid}">
+                    <ion-label position="stacked">Type 02</ion-label>
+                    <ion-input formControlName="TYPE_02" placeholder="type here..."></ion-input>
+                </ion-item>
+
+                <ion-item class="select-field-item"
+                          [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['BRAND_02'].invalid}">
+                    <ion-label position="stacked">Brand 02</ion-label>
+                    <ion-input formControlName="BRAND_02" placeholder="type here..."></ion-input>
+                </ion-item>
+
+                <ion-item class="select-field-item"
+                          [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['BATCH_02'].invalid}">
+                    <ion-label position="stacked">Batch 02</ion-label>
+                    <ion-input formControlName="BATCH_02" placeholder="type here..."></ion-input>
+                </ion-item>
+
+                <ion-item class="select-field-item"
+                          [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['TYPE_03'].invalid}">
+                    <ion-label position="stacked">Type 03</ion-label>
+                    <ion-input formControlName="TYPE_03" placeholder="type here..."></ion-input>
+                </ion-item>
+
+                <ion-item class="select-field-item"
+                          [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['BRAND_03'].invalid}">
+                    <ion-label position="stacked">Brand 03</ion-label>
+                    <ion-input formControlName="BRAND_03" placeholder="type here..."></ion-input>
+                </ion-item>
+
+                <ion-item class="select-field-item"
+                          [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['BATCH_03'].invalid}">
+                    <ion-label position="stacked">Batch 03</ion-label>
+                    <ion-input formControlName="BATCH_03" placeholder="type here..."></ion-input>
+                </ion-item>
+
+                <ion-item class="select-field-item"
+                          [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['TYPE_04'].invalid}">
+                    <ion-label position="stacked">Type 04</ion-label>
+                    <ion-input formControlName="TYPE_04" placeholder="type here..."></ion-input>
+                </ion-item>
+
+                <ion-item class="select-field-item"
+                          [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['BRAND_04'].invalid}">
+                    <ion-label position="stacked">Brand 04</ion-label>
+                    <ion-input formControlName="BRAND_04" placeholder="type here..."></ion-input>
+                </ion-item>
+
+                <ion-item class="select-field-item"
+                          [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['BATCH_04'].invalid}">
+                    <ion-label position="stacked">Batch 04</ion-label>
+                    <ion-input formControlName="BATCH_04" placeholder="type here..."></ion-input>
+                </ion-item>
+            </div>
+        </form>
+
+    </div>
+</ion-content>
+
+<ion-footer>
+    <app-footer-magnetic [currentRoute]="step"
+                         [isFirstRoute]="false"
+                         [isFinalRoute]="false"
+                         [isFormValid]="validForm"
+                         validationMessage="Please complete all required fields."
+                         (nextClicked)="navigateToNext($event)">
+    </app-footer-magnetic>
+</ion-footer>

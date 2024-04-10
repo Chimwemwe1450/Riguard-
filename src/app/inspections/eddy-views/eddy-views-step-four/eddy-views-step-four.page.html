@@ -1,0 +1,137 @@
+<ion-header>
+  <app-header-inspections></app-header-inspections>
+</ion-header>
+
+<div class="header-container fixed-header" slot="fixed">
+  <div class="page-heading">
+    <app-content-header [heading]="heading"
+                        [stepCount]="stepCount"
+                        [currentStep]="step">
+    </app-content-header>
+  </div>
+</div>
+
+<ion-content>
+  <div class="page-container">
+    <div class="top-form-inputs">
+      <h5>Step {{step}} - {{stepDescription}}</h5>
+      <ion-list>
+        <ion-item class="item-item" lines="None">
+          <ion-avatar>
+            <ion-icon name="reader-outline"></ion-icon>
+          </ion-avatar>
+          <ion-label>
+            <b>Reference Procedure</b><br>
+            123
+          </ion-label>
+        </ion-item>
+        <ion-item class="item-item" lines="None">
+          <ion-avatar>
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+          </ion-avatar>
+          <ion-label>
+            <b>Acceptance Criteria</b><br>
+            123
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <form [formGroup]="form">
+      <div class="form-inputs">
+        <ion-item class="input-field-item"
+                  [ngClass]="{'ion-invalid ion-touched':navigateNext && form.controls['COMPONENT_TRACEABILITY'].invalid}">
+          <ion-label position="stacked">Component/Traceability Serial Number</ion-label>
+          <ion-input formControlName="COMPONENT_TRACEABILITY" placeholder="type here..."></ion-input>
+        </ion-item>
+        <br>
+        <div [ngClass]="{'invalid-input':navigateNext && form.controls['INSPECTION_STATUS'].invalid}">
+          <ion-radio-group formControlName="INSPECTION_STATUS">
+            <ion-item>
+              <ion-label>Accept</ion-label>
+              <ion-radio slot="start" value="Acceptable"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Reject</ion-label>
+              <ion-radio slot="start" value="Reject"></ion-radio>
+            </ion-item>
+            <ion-item lines="None">
+              <ion-label>Engineer Review</ion-label>
+              <ion-radio slot="start" value="Engineer_Review"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </div>
+        <br>
+
+        <div *ngIf="(form.value.inspectionResult === 'accept') || (form.value.inspectionResult === null); else indicationsButton"
+             id="remarks-block">
+          <ion-label>
+            <b>Remarks</b>
+          </ion-label>
+          <div class="inline-content">
+            <ion-icon name="checkmark-outline" class="padding-right"></ion-icon>
+            <p>No relevant indication found at the time of inspection</p>
+          </div>
+        </div>
+
+      </div>
+    </form>
+
+    <ng-template #indicationsButton>
+      <!-- <ion-button (click)="addIndication()" color="secondary">
+        <ion-icon slot="start" name="add-outline" class="smaller-icon"></ion-icon>
+        {{!indications.length ? 'Add Indication' : 'Add Another indication'}}
+      </ion-button> -->
+      <br>
+      <br>
+
+      <form [formGroup]="indicationForm">
+        <div formArrayName="indication"
+              *ngFor="let ind of indications.controls; let i = index;"
+              class="form-inputs-container"
+              style="position:relative; margin-bottom:25px">
+              <ion-label>Indication - {{i + 1}}</ion-label>
+              <span class="clear-button">
+              <ion-icon (click)="removeIndication(i)" name="close-circle-outline"></ion-icon>
+              </span>
+          <div [formGroupName]="i"
+                class="form-inputs">
+            <ion-item class="input-field-item">
+              <ion-label position="stacked">Distance From Datum (inches)</ion-label>
+              <ion-input formControlName="distanceFromDatum" placeholder="type here..."></ion-input>
+            </ion-item>
+            <ion-item class="input-field-item">
+              <ion-label position="stacked">Length (inches)</ion-label>
+              <ion-input formControlName="length" placeholder="type here..."></ion-input>
+            </ion-item>
+            <ion-item class="input-field-item">
+              <ion-label position="stacked">dB Ref</ion-label>
+              <ion-input formControlName="dbRef" placeholder="type here..."></ion-input>
+            </ion-item>
+            <div *ngIf="ind.value.indicationImage !== null"
+                  class="photo-frame">
+              <ion-img [src]="ind.value.indicationImage"></ion-img>
+            </div>
+            <br>
+            <ion-button color="secondary"
+                        (click)="addImage(i)">
+                        <ion-icon slot="start" name="camera-outline" class="smaller-icon"></ion-icon>
+                        {{ind.value.indicationImage === null ? 'Take photo' : 'Edit photo'}}
+            </ion-button>
+          </div>
+        </div>
+      </form>
+    </ng-template>
+
+  </div>
+</ion-content>
+
+<ion-footer>
+  <app-footer-eddy [currentRoute]="step"
+                   [isFirstRoute]="false"
+                   [isFinalRoute]="true"
+                   [isFormValid]="validForm"
+                   validationMessage="Please complete all required fields."
+                   (nextClicked)="navigateToNext($event)">
+  </app-footer-eddy>
+</ion-footer>

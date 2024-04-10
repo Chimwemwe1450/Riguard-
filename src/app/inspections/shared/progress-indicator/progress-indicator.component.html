@@ -1,0 +1,15 @@
+<div id="completion-circle">
+  <div id="percentage-value">{{percentage || 0}}%</div>
+  <svg class="progress-ring"
+       width="50"
+       height="50">
+       <circle #myCircle
+               class="progress-ring__circle"
+               stroke="var(--secondary)"
+               stroke-width="3"
+               fill="#444"
+               r="20"
+               cx="25"
+               cy="25"/>
+  </svg>
+</div>

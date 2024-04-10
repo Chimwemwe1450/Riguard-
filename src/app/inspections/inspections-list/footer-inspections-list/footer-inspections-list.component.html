@@ -1,0 +1,25 @@
+<div class="inspections-footer">
+  <div class="footer-button-group">
+    <div id="footer-button-left">
+      <div *ngIf="syncStatsData">
+        <span class="footer-number-values">{{syncStatsData?.assigned}}</span> Assigned<br>
+        <span class="footer-number-values">{{syncStatsData?.completed}}</span> Completed<br>
+        <span class="footer-number-values">{{syncStatsData?.awaitingSync}}</span> Awaiting Sync
+      </div>
+    </div>
+
+    <div id="footer-button-right">
+      <div *ngIf="syncStatsData.completionPercentage !== undefined"
+           id="completion-percentage">
+        <div>Completion</div>
+        <app-progress-indicator [percentage]="syncStatsData.completionPercentage">
+        </app-progress-indicator>
+      </div>
+
+      <div id="sync"
+           (click)="onSync()">
+        <ion-icon [ngClass]="{'spin-icon': spinning === true}" name="sync-outline"></ion-icon>
+      </div>
+    </div>
+  </div>
+</div>
